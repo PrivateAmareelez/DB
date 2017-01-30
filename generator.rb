@@ -70,3 +70,4 @@ end
 start = Time.now
 Generator.generate
 puts Time.now - start
+###
