@@ -6,7 +6,7 @@ class Generator
 
   def self.generate
     check_arguments
-    generateUS(Integer(ARGV[1]), Float(ARGV[2]))
+    generate_us(Integer(ARGV[1]), Float(ARGV[2]))
   end
 
   private
@@ -33,10 +33,11 @@ class Generator
     end
   end
 
-  def self.generateUS size, error_value
-    Faker::Config.locale    = 'en-US'
+  def self.generate_us size, error_value
+    Faker::Config.locale = 'en-GB'
     names, adresses, phones = [], [], []
-    sample_size             = Integer((2 * Math.cbrt(size)))
+    #sample_size             = Integer((2 * Math.cbrt(size)))
+    sample_size = size
     sample_size.times do
       names.push Faker::Name.unique.name
       adresses.push Faker::Address.unique.full_address
