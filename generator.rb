@@ -2,7 +2,7 @@ require 'Faker'
 
 class Generator
 
-  REGIONS = ['UK', 'US', 'RU', 'BY']
+  REGIONS = %w(UK US RU BY)
 
   def self.generate
     check_arguments
@@ -44,7 +44,7 @@ class Generator
       phones.push "+(#{Faker::PhoneNumber.area_code})#{Faker::PhoneNumber.exchange_code}-#{Faker::PhoneNumber.subscriber_number(4)}"
     end
 
-    current_error_residual = error_value;
+    current_error_residual = error_value
     used = Hash.new(0)
     size.times do
       String record = "#{names[rand(sample_size)]}; #{adresses[rand(sample_size)]}, USA; #{phones[rand(sample_size)]}"
@@ -53,17 +53,17 @@ class Generator
       end
       Integer(current_error_residual).times do
         case rand 3
-        when 1
+        when 0
           record.insert(rand(record.length), ('a'..'z').to_a[rand(26)])
-        when 2
+        when 1
           record.slice!(rand(record.length))
-        when 3
+        when 2
           i, temp = rand(record.length - 1), record[i].dup
           record[i], record[i + 1] = record[i + 1], temp
         end
       end
       puts record
-      current_error_residual -= Integer(current_error_residual) - error_value;
+      current_error_residual -= Integer(current_error_residual) - error_value
     end
   end
 end
